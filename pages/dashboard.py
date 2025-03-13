@@ -263,3 +263,32 @@ with onglet1:
         elif valeur_indic=="Ratio population/SFE-ME":
             var_connex="Effectif de Sage femme"
 
+        ###graph
+        fig = px.bar(ressource, x="Annee", y=valeur_indic,
+      text=valeur_indic
+        )
+
+
+        # Ajout d'une ligne horizontale pour l'objectif
+        fig.add_hline(y=norme_PNDS, line_dash="dash", line_color="red", 
+                    annotation_text=f"Objectif : {objectif}", 
+                    annotation_position="top left")
+
+        # Mise en forme
+        fig.update_traces(texttemplate='%{text:.1f}', textposition='outside')
+        fig.update_layout(
+            xaxis_title="Année",
+            yaxis_title="Valeur",
+            yaxis_gridcolor="lightgray",
+            #title=f"Évolution de {valeur_indic}",
+            title_x=0.5
+        )
+
+        # Affichage dans Streamlit"
+
+        st.plotly_chart(fig)
+
+
+st.write(ressource)
+
+
